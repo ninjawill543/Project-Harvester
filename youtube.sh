@@ -21,5 +21,5 @@ do
         echo "Command is: " && zbarimg --quiet "$(dirname "$(readlink -f "$0")")/command.jpg" | cut -c 9-
         video_save=$newest_video_url
     fi
-    sleep 10
+    sleep 30
 done

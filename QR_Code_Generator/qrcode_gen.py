@@ -2,6 +2,7 @@ import qrcode
 import cv2
 import numpy as np
 import sys
+import os
 
 
 def image_create (input):
@@ -47,9 +48,13 @@ def video_create ():
         vidwriter.write(frame)
     vidwriter.release()
 
+def remove_image():
+    os.remove("qr_code.png") 
+
 
 
 if __name__ == "__main__":
     image_create(sys.argv[1])
     video_create()
+    remove_image()
 
