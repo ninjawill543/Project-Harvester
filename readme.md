@@ -6,3 +6,7 @@ The program monitors a Youtube channel until a video is uploaded, decodes the QR
 
 
 ![img1](./images/expl.png)
+
+## Credit
+
+The idea for this project was originally conceived by [Ricardo Ruiz](https://github.com/ricardojoserf). I have recreated his [project](https://github.com/ricardojoserf/SharpCovertTube) entirely from scratch with the aim of understanding how it works and adapting it for Linux systems.
