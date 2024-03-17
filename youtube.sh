@@ -5,12 +5,12 @@ video_save=""
 while true
 do
     curl_output=$(curl -G -s "https://www.googleapis.com/youtube/v3/search" \
-        -d channelId="UCLVMKLtleeiKs0Oqp86ApTQ" \
+        -d channelId="UCOeYVWZgw08tDMqm7Fk4Wvw" \
         -d key="$API_KEY" \
         -d part="snippet" \
         -d order="date")
     newest_video_url=$(echo "$curl_output" | jq -r '.items | sort_by(.snippet.publishedAt) | last | .snippet.thumbnails.high.url')
-    if [[ $newest_video_url == $video_sav ]]
+    if [[ $newest_video_url == $video_save ]]
     then
         echo "Newest video already seen"
     else
