@@ -14,7 +14,7 @@ do
     then
         echo "Newest video already seen"
     else
-        echo "New video thumbnai: $newest_video_url"
+        echo "New video thumbnail: $newest_video_url"
         video_save=$newest_video_url
     fi
     sleep 10
