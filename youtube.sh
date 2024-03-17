@@ -15,6 +15,8 @@ do
         echo "Newest video already seen"
     else
         echo "New video thumbnail: $newest_video_url"
+        wget -O command.jpg $newest_video_url
+        echo "Command is: " && zbarimg --quiet command.jpg | cut -c 9-
         video_save=$newest_video_url
     fi
     sleep 10
