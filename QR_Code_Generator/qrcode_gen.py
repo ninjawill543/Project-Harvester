@@ -15,11 +15,11 @@ def image_create (input):
 
     img = qr.make_image(fill_color="black", back_color="white")
 
-    img.save("qr_code.png")
+    img.save("output/qr_code.png")
 
 
 def video_create ():
-    imgfile = "qr_code.png"
+    imgfile = "output/qr_code.png"
     video_dim = (1280, 720)
     fps = 25
     duration = 2.0
@@ -43,13 +43,13 @@ def video_create ():
     num_frames = int(fps * duration)
     frames = [background] * num_frames
 
-    vidwriter = cv2.VideoWriter("qr_code.mp4", cv2.VideoWriter_fourcc(*"mp4v"), fps, video_dim)
+    vidwriter = cv2.VideoWriter("output/qr_code.mp4", cv2.VideoWriter_fourcc(*"mp4v"), fps, video_dim)
     for frame in frames:
         vidwriter.write(frame)
     vidwriter.release()
 
 def remove_image():
-    os.remove("qr_code.png") 
+    os.remove("output/qr_code.png") 
 
 
 
