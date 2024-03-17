@@ -10,12 +10,12 @@ do
         -d part="snippet" \
         -d order="date")
     newest_video_url=$(echo "$curl_output" | jq -r '.items | sort_by(.snippet.publishedAt) | last | .snippet.thumbnails.high.url')
-    if ($newest_video_url == $video_save)
+    if [[ $newest_video_url == $video_sav ]]
     then
         echo "Newest video already seen"
     else
         echo "New video thumbnai: $newest_video_url"
+        video_save=$newest_video_url
     fi
-    #$newest_video_url
     sleep 10
 done
