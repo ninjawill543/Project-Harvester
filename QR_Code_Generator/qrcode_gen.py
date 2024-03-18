@@ -3,6 +3,25 @@ import cv2
 import numpy as np
 import sys
 import os
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
+import base64
+
+def encode (input):
+    key_hex = b'4326462948404d635166546a576e5a72' #Please change, this is just used for the example!
+
+    data = input
+    key = bytes.fromhex(key_hex.decode())
+    cipher = AES.new(key, AES.MODE_ECB)
+
+    block_size = 16
+    data_padded = data + (block_size - len(data) % block_size) * chr(block_size - len(data) % block_size)
+
+    ciphertext = cipher.encrypt(data_padded.encode())
+
+    encoded_ciphertext = base64.b64encode(ciphertext).decode()
+
+    return(encoded_ciphertext)
 
 
 def image_create (input):
@@ -54,7 +73,7 @@ def remove_image():
 
 
 if __name__ == "__main__":
-    image_create(sys.argv[1])
+    image_create(encode(sys.argv[1]))
     video_create()
     remove_image()
 
