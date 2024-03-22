@@ -6,6 +6,8 @@ import os
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
 import base64
+import argparse
+
 
 def encode (input):
     key_hex = b'4326462948404d635166546a576e5a72' #Please change, this is just used for the example!
@@ -73,7 +75,20 @@ def remove_image():
 
 
 if __name__ == "__main__":
-    image_create(encode(sys.argv[1]))
-    video_create()
-    remove_image()
+    parser = argparse.ArgumentParser(description="Convert a string to a QR code, that is then converted into a video.")
+    parser._action_groups.pop()
+    required = parser.add_argument_group('Required arguments')
+    optional = parser.add_argument_group('Optional arguments')
+    optional.add_argument("--aes", help="Chose aes than cleartext to encrypt message. If chosen, please input your aes hex key on line 12", action="store_true")
+    required.add_argument('--string', help="String to convert", required=True)
+    args = parser.parse_args()
+    if args.aes:
+        print(encode(args.string))
+        #image_create(encode(sys.argv[1]))
+    else:
+        print(args.string)
+        #image_create(sys.argv[1])
+    
+    #video_create()
+    #remove_image()
 
