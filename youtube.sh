@@ -2,7 +2,7 @@
 API_KEY=$(cat key.txt)
 
 
-
+video_present=false
 video_save=""
 while true
 do
@@ -12,9 +12,10 @@ do
         -d part="snippet" \
         -d order="date")
     newest_video_url=$(echo "$curl_output" | jq -r '.items | sort_by(.snippet.publishedAt) | last | .snippet.thumbnails.high.url')
-    if [[ $(echo "$curl_output" | jq '.items') == "[]" ]]; then
+    if [[ $(echo "$curl_output" | jq '.items') == "[]" && $video_present == false ]]; then
         echo "No videos have been published on this channel"
     else
+        video_present=true
         if [[ $newest_video_url == $video_save ]]
         then
             echo "Newest video already seen"
