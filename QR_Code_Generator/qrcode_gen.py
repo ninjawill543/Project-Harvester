@@ -83,12 +83,10 @@ if __name__ == "__main__":
     required.add_argument('--string', help="String to convert", required=True)
     args = parser.parse_args()
     if args.aes:
-        print(encode(args.string))
-        #image_create(encode(sys.argv[1]))
+        image_create(encode(args.string))
     else:
-        print(args.string)
-        #image_create(sys.argv[1])
+        image_create(args.string)
     
-    #video_create()
-    #remove_image()
+    video_create()
+    remove_image()
 
