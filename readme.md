@@ -5,7 +5,7 @@ Project Harvester is a program created to control Linux systems remotely by uplo
 The program monitors a Youtube channel until a video is uploaded, decodes the QR code from the thumbnail of the uploaded video and executes a command. The QR codes in the videos can use cleartext or AES-encrypted values.
 
 
-![img1](./images/expl.png)
+![expl](https://github.com/ninjawill543/Project-Harvester/assets/112950582/90af6b2d-0e77-442e-b334-6426dcbdb198)
 
 ## Credit
 
