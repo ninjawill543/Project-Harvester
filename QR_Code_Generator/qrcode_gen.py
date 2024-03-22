@@ -27,6 +27,7 @@ def encode (input):
 
 
 def image_create (input):
+    os.system("mkdir output/")
     qr = qrcode.QRCode(version=3, box_size=20, border=1, error_correction=qrcode.constants.ERROR_CORRECT_H)
     data = input
 
@@ -63,7 +64,6 @@ def video_create ():
 
     num_frames = int(fps * duration)
     frames = [background] * num_frames
-
     vidwriter = cv2.VideoWriter("output/qr_code.mp4", cv2.VideoWriter_fourcc(*"mp4v"), fps, video_dim)
     for frame in frames:
         vidwriter.write(frame)
