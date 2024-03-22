@@ -14,6 +14,7 @@ do
     newest_video_url=$(echo "$curl_output" | jq -r '.items | sort_by(.snippet.publishedAt) | last | .snippet.thumbnails.high.url')
     if [[ $(echo "$curl_output" | jq '.items') == "[]" && $video_present == false ]]; then
         echo "No videos have been published on this channel"
+        sleep 60
     else
         video_present=true
         if [[ $newest_video_url == $video_save ]]
