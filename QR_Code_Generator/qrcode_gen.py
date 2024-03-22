@@ -26,10 +26,11 @@ def encode (input):
     return(encoded_ciphertext)
 
 
-def image_create (input):
-    os.system("mkdir output/")
+def image_create (input, aes):
+    if not os.path.exists('output'):
+        os.makedirs('output')
     qr = qrcode.QRCode(version=3, box_size=20, border=1, error_correction=qrcode.constants.ERROR_CORRECT_H)
-    data = input
+    data = aes + input
 
     qr.add_data(data)
 
@@ -83,9 +84,9 @@ if __name__ == "__main__":
     required.add_argument('--string', help="String to convert", required=True)
     args = parser.parse_args()
     if args.aes:
-        image_create(encode(args.string))
+        image_create(encode(args.string), "~1~")
     else:
-        image_create(args.string)
+        image_create(args.string, "~0~")
     
     video_create()
     remove_image()
